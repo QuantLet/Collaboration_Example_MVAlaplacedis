@@ -3,52 +3,48 @@
 # −−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−
 # Published in : Applied Multivariate Statistical Analysis
 # −−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−
-# Description : plots three probability density functions 
-# (left) and three cumulative density functions (right) 
+# Description : Plots three probability density functions 
+# (top) and three cumulative density functions (bottom) 
 # of the Laplace-distribution with different scale 
-# (L1 stands for Laplace-distribution with scale 1, etc.).
+# (L1 stands for Laplace-distribution with scale 1, etc).
 # −−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−
-# Keywords : pdf, cdf, multivariate, laplace, scale, plot,
-# visualization
+# Keywords : pdf, probability, density, cdf, multivariate, laplace, scale, plot, graphical representation, 
+# distribution, heavy-tailed
 # −−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−
 # See also : 
 # −−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−
-# Author : Wolfgang Haerdle
+# Author : Wolfgang K. Härdle
 # −−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−
 # Submitted : Sun, January 29 2012 by Dedy Dwi Prastyo
 # −−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−
-# Example : Shows the plots of probability density
-# functiona and cumulative density functions of the
-# the Laplace-distribution with different scale
-# −−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−−
 
+# clear variables and close windows
 rm(list = ls(all = TRUE))
 graphics.off()
 
-install.packages("VGAM")
-library(VGAM)
+# install and load packages
+libraries = c("VGAM")
+lapply(libraries, function(x) if (!(x %in% installed.packages())) {
+    install.packages(x)
+})
+lapply(libraries, library, quietly = TRUE, character.only = TRUE)
 
-# Laplace Distribution
-
-par(mar = c(6, 5, 5, 5))
-par(mfrow = c(1, 2))
+# PDF of Laplace Distribution
 xx = seq(-6, 6, by = 0.1)
-plot(xx, dlaplace(xx, location = 0, scale = 1), type = "l", ylab = "Y", 
-    xlab = "X", col = "black", lwd = 3, cex.lab = 2, cex.axis = 2)
-lines(xx, dlaplace(xx, location = 0, scale = 1.5), type = "l", col = "blue", 
-    lwd = 3)
-lines(xx, dlaplace(xx, location = 0, scale = 2), type = "l", col = "red", 
-    lwd = 3)
-legend(x = 2, y = 0.4, legend = c("L1", "L1.5", "L2"), pch = c(20, 20), 
-    col = c("black", "blue", "red"), bty = "n")
+plot(xx, dlaplace(xx, location = 0, scale = 1), type = "l", ylab = "Y", xlab = "X", 
+    col = "black", lwd = 3, cex.lab = 2, cex.axis = 2)
+lines(xx, dlaplace(xx, location = 0, scale = 1.5), type = "l", col = "blue", lwd = 3)
+lines(xx, dlaplace(xx, location = 0, scale = 2), type = "l", col = "red", lwd = 3)
+legend(x = 2, y = 0.4, legend = c("L1", "L1.5", "L2"), pch = c(20, 20), col = c("black", 
+    "blue", "red"), bty = "n")
 title("PDF of Laplace distribution")
 
-plot(xx, plaplace(xx, location = 0, scale = 1), type = "l", ylab = "Y", 
-    xlab = "X", col = "black", lwd = 3, cex.lab = 2, cex.axis = 2)
-lines(xx, plaplace(xx, location = 0, scale = 1.5), type = "l", col = "blue", 
-    lwd = 3)
-lines(xx, plaplace(xx, location = 0, scale = 2), type = "l", col = "red", 
-    lwd = 3)
-legend(x = 2, y = 0.8, legend = c("L1", "L1.5", "L2"), pch = c(20, 20), 
-    col = c("black", "blue", "red"), bty = "n")
+# CDF of Laplace Distribution
+dev.new()
+plot(xx, plaplace(xx, location = 0, scale = 1), type = "l", ylab = "Y", xlab = "X", 
+    col = "black", lwd = 3, cex.lab = 2, cex.axis = 2)
+lines(xx, plaplace(xx, location = 0, scale = 1.5), type = "l", col = "blue", lwd = 3)
+lines(xx, plaplace(xx, location = 0, scale = 2), type = "l", col = "red", lwd = 3)
+legend(x = 2, y = 0.8, legend = c("L1", "L1.5", "L2"), pch = c(20, 20), col = c("black", 
+    "blue", "red"), bty = "n")
 title("CDF of Laplace distribution") 
